@@ -34,7 +34,7 @@ i18n
     });
 
     // Fetch translations from the public directory
-fetch("/reacttemplate/locales/en/translation.json")
+fetch("/locales/en/translation.json")
   .then((response) => response.json())
   .then((data) => {
     i18n.addResourceBundle("en", "translation", data);
