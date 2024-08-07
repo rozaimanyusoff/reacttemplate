@@ -7,7 +7,7 @@ export default defineConfig({
     plugins: [
         react(),
     ],
-    //base: '/reacttemplate/',
+    base: '/reacttemplate/',
     resolve: {
         alias: {
             '@': path.resolve(__dirname, './src'),
@@ -16,9 +16,9 @@ export default defineConfig({
     build: {
         rollupOptions: {
             output: {
-                entryFileNames: 'reacttemplate/assets/[name].[hash].js',
-                chunkFileNames: 'reacttemplate/assets/[name].[hash].js',
-                assetFileNames: 'reacttemplate/assets/[name].[hash].[ext]',
+                entryFileNames: 'assets/[name].[hash].js',
+                chunkFileNames: 'assets/[name].[hash].js',
+                assetFileNames: 'assets/[name].[hash].[ext]',
             },
         },
     },
