@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { IRootState } from '../../store';
+import { RootState } from '../../store';
 import { useEffect, useState } from 'react';
 import { setPageTitle, toggleRTL } from '../../store/themeConfigSlice';
 import Dropdown from '../../components/Dropdown';
@@ -13,6 +13,7 @@ import IconFacebookCircle from '../../components/Icon/IconFacebookCircle';
 import IconTwitter from '../../components/Icon/IconTwitter';
 import IconGoogle from '../../components/Icon/IconGoogle';
 import IconUser from '../../components/Icon/IconUser';
+import { setToken, setUser } from '../../store/authSlice';
 
 const LoginBoxed = () => {
     const dispatch = useDispatch();
@@ -20,9 +21,9 @@ const LoginBoxed = () => {
         dispatch(setPageTitle('Login Boxed'));
     });
     const navigate = useNavigate();
-    const isDark = useSelector((state: IRootState) => state.themeConfig.theme === 'dark' || state.themeConfig.isDarkMode);
-    const isRtl = useSelector((state: IRootState) => state.themeConfig.rtlClass) === 'rtl' ? true : false;
-    const themeConfig = useSelector((state: IRootState) => state.themeConfig);
+    const isDark = useSelector((state: RootState) => state.themeConfig.theme === 'dark' || state.themeConfig.isDarkMode);
+    const isRtl = useSelector((state: RootState) => state.themeConfig.rtlClass) === 'rtl' ? true : false;
+    const themeConfig = useSelector((state: RootState) => state.themeConfig);
     const setLocale = (flag: string) => {
         setFlag(flag);
         if (flag.toLowerCase() === 'ae') {
@@ -46,10 +47,12 @@ const LoginBoxed = () => {
                 },
                 body: JSON.stringify({ auth: 'login', username, password }),
             });
-            const data = await response.json();
+            const data = await response.json(); // `data` is defined here
 
             if (response.ok && data.status === 'Success') {
-                localStorage.setItem('token', data.token);
+                //localStorage.setItem('token', data.token);
+                dispatch(setToken(data.token)); // Dispatching `data.token`
+                dispatch(setUser(data.user));
                 navigate('/index');
             } else {
                 setError(data.message || 'Login failed');

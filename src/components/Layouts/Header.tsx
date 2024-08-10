@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { IRootState } from '../../store';
 import { toggleRTL, toggleTheme, toggleSidebar } from '../../store/themeConfigSlice';
 import { useTranslation } from 'react-i18next';
@@ -60,6 +60,15 @@ const Header = () => {
 
     const themeConfig = useSelector((state: IRootState) => state.themeConfig);
     const dispatch = useDispatch();
+
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        // Clear the authentication token
+        localStorage.removeItem('token');
+
+        // Redirect to the login page
+        navigate('/');
+    };
 
     function createMarkup(messages: any) {
         return { __html: messages };
@@ -455,7 +464,7 @@ const Header = () => {
                                         </Link>
                                     </li>
                                     <li className="border-t border-white-light dark:border-white-light/10">
-                                        <Link to="/auth/boxed-signin" className="text-danger !py-3">
+                                        <Link to="/" className="text-danger !py-3" onClick={handleLogout}>
                                             <IconLogout className="w-4.5 h-4.5 ltr:mr-2 rtl:ml-2 rotate-90 shrink-0" />
                                             Sign Out
                                         </Link>

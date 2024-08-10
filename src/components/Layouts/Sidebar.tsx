@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 import { toggleSidebar } from '../../store/themeConfigSlice';
 import AnimateHeight from 'react-animate-height';
-import { IRootState } from '../../store';
+import { RootState } from '../../store';
 import { useState, useEffect } from 'react';
 import IconCaretsDown from '../Icon/IconCaretsDown';
 import IconCaretDown from '../Icon/IconCaretDown';
@@ -31,12 +31,13 @@ import IconMenuUsers from '../Icon/Menu/IconMenuUsers';
 import IconMenuPages from '../Icon/Menu/IconMenuPages';
 import IconMenuAuthentication from '../Icon/Menu/IconMenuAuthentication';
 import IconMenuDocumentation from '../Icon/Menu/IconMenuDocumentation';
+import IconMenuAdmin from '../Icon/IconUsers';
 
 const Sidebar = () => {
     const [currentMenu, setCurrentMenu] = useState<string>('');
     const [errorSubMenu, setErrorSubMenu] = useState(false);
-    const themeConfig = useSelector((state: IRootState) => state.themeConfig);
-    const semidark = useSelector((state: IRootState) => state.themeConfig.semidark);
+    const themeConfig = useSelector((state: RootState) => state.themeConfig);
+    const semidark = useSelector((state: RootState) => state.themeConfig.semidark);
     const location = useLocation();
     const dispatch = useDispatch();
     const { t } = useTranslation();
@@ -78,8 +79,8 @@ const Sidebar = () => {
                 <div className="bg-white dark:bg-black h-full">
                     <div className="flex justify-between items-center px-4 py-3">
                         <NavLink to="/" className="main-logo flex items-center shrink-0">
-                            <img className="w-8 ml-[5px] flex-none" src="/assets/images/logo.svg" alt="logo" />
-                            <span className="text-2xl ltr:ml-1.5 rtl:mr-1.5 font-semibold align-middle lg:inline dark:text-white-light">{t('VRISTO')}</span>
+                            <img className="w-8 ml-[5px] flex-none" src="/assets/images/logo.svg" alt="logo" /> {/* mark */}
+                            <span className="text-2xl ltr:ml-1.5 rtl:mr-1.5 font-semibold align-middle lg:inline dark:text-white-light">{t('RTSA')}</span> {/* mark */}
                         </NavLink>
 
                         <button
@@ -127,6 +128,28 @@ const Sidebar = () => {
                                 <IconMinus className="w-4 h-5 flex-none hidden" />
                                 <span>{t('apps')}</span>
                             </h2>
+
+                            <li className="menu nav-item">
+                                <button type="button" className={`${currentMenu === 'admin' ? 'active' : ''} nav-link group w-full`} onClick={() => toggleMenu('admin')}>
+                                    <div className="flex items-center">
+                                        <IconMenuUsers className="group-hover:!text-primary shrink-0" />
+                                        <span className="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{t('Admin')}</span> {/* mark: admin 1st level */}
+                                    </div>
+
+                                    <div className={currentMenu !== 'admin' ? 'rtl:rotate-90 -rotate-90' : ''}>
+                                        <IconCaretDown />
+                                    </div>
+                                </button>
+
+                                <AnimateHeight duration={300} height={currentMenu === 'admin' ? 'auto' : 0}>
+                                    <ul className="sub-menu text-gray-500">
+                                        <li>
+                                            <NavLink to="/users">{t('users')}</NavLink>
+                                        </li>
+                                    </ul>
+                                </AnimateHeight>
+                            </li>
+
 
                             <li className="nav-item">
                                 <ul>
