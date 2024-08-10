@@ -8,7 +8,7 @@
         "build": "vite build && tsc",
         "preview": "vite preview",
         "predeploy": "npm run build",
-        "deploy": "gh-pages -d dist"
+        "deploy": "gh-pages -d build"
     },
     "dependencies": {
         "@emotion/react": "^11.10.6",
@@ -89,5 +89,5 @@
         "typescript": "^4.9.3",
         "vite": "^4.1.0"
     },
-    "homepage": "https://rozaimanyusoff.github.io/reacttemplate"
+    "homepage": "https://rozaimanyusoff.github.io/reacttemplate/"
 }
