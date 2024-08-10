@@ -7,6 +7,7 @@ export default defineConfig({
     plugins: [
         react(),
     ],
+    base: '/reacttemplate/',
     resolve: {
         alias: {
             '@': path.resolve(__dirname, './src'),
