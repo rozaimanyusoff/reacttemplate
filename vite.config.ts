@@ -7,20 +7,10 @@ export default defineConfig({
     plugins: [
         react(),
     ],
-    base: '/reacttemplate/',
+    //base: '/reacttemplate/',
     resolve: {
         alias: {
             '@': path.resolve(__dirname, './src'),
         },
     },
-    server: {
-        proxy: {
-            '/api': {
-                target: 'https://j8.ranhilltechnologies.com.my',
-                changeOrigin: true,
-                secure: false,
-                rewrite: (path) => path.replace(/^\/api/, '')
-            }
-        }
-    }
 });
