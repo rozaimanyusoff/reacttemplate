@@ -89,9 +89,5 @@
         "typescript": "^4.9.3",
         "vite": "^4.1.0"
     },
-<<<<<<< HEAD
     "homepage": "https://rozaimanyusoff.github.io/reacttemplate"
-=======
-    "homepage": "https://rozaimanyusoff.github.io/reacttemplate/"
->>>>>>> 67773e781de8e6f825be2448078d66bfeb6f9d5a
 }
